@@ -8,26 +8,52 @@ import java.util.List;
 
 public class day1
 {
-    public static List<Integer> totalList(String filename, List<Integer> list) throws IOException
+    //Returns a list of the total of calories each elf has
+    public static void totalList(String filename, List<Integer> list) throws IOException
     {
+        //Enables me to read through the fie:
         FileReader reader = new FileReader(filename);
         BufferedReader file = new BufferedReader(reader);
+        int totalCal = 0;
+
+        //Reads the lines from the file and stops when it hits the end
         while(true)
         {
             String line = file.readLine();
-            System.out.println(line);
             if(line == null)
             {
                 break;
             }
+            else if(line.strip()=="")
+            {
+                list.add(totalCal);
+                totalCal = 0;
+            }
+            else
+            {
+                totalCal += Integer.parseInt(line);
+            }
         }
         file.close();
-        return null;
+    }
+
+    public static int findBiggest(List<Integer> list)
+    {
+        int highest = 0;
+        for(int total : list)
+        {
+            if(total > highest)
+            {
+                highest = total;
+            }
+        }
+        return highest;
     }
 
     public static void main(String[] args) throws IOException 
     {
         List<Integer> l = new ArrayList<>();
         totalList("day1/data.txt", l);
+        System.out.println(findBiggest(l));
     }
 }

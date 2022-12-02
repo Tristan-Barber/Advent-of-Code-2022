@@ -50,10 +50,65 @@ public class day1
         return highest;
     }
 
+    public static List<Integer> findTopThree(List<Integer> list)
+    {
+        int index = 0;
+        int highest = 0;
+        List<Integer> topThree = new ArrayList<>();
+        List<Integer> copy = list;
+        for(int total : list)
+        {
+            if(total > highest)
+            {
+                highest = total;
+                index = list.indexOf(highest);
+            }
+        }
+        topThree.add(highest);
+        highest = 0;
+        copy.remove(index);
+        for(int total : list)
+        {
+            if(total > highest)
+            {
+                highest = total;
+                index = list.indexOf(highest);
+            }
+        }
+        topThree.add(highest);
+        highest = 0;
+        copy.remove(index);
+
+        for(int total : list)
+        {
+            if(total > highest)
+            {
+                highest = total;
+                index = list.indexOf(highest);
+            }
+        }
+        topThree.add(highest);
+        highest = 0;
+        copy.remove(index);
+
+        return topThree;
+    }
+
     public static void main(String[] args) throws IOException 
     {
         List<Integer> l = new ArrayList<>();
         totalList("day1/data.txt", l);
+        System.out.println("Highest:");
         System.out.println(findBiggest(l));
+        System.out.println("Top 3:");
+        List<Integer> top = findTopThree(l);
+        System.out.println(top);
+        System.out.println("Top 3 Total:");
+        int total = 0;
+        for(int element : top)
+        {
+            total += element;
+        }
+        System.out.println(total);
     }
 }
